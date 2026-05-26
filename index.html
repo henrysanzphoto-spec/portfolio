@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Henry Sanchez — Fotógrafo & Filmmaker</title>
+<meta name="description" content="Fotografia e vídeo cinematográfico para hospedagens, restaurantes, turismo e retratos na Amazônia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@200;300;400;500&family=Glacial+Indifference:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #080808;
+    --off-black: #0d0d0d;
+    --dark: #141414;
+    --mid: #2a2a2a;
+    --muted: #555;
+    --subtle: #888;
+    --light: #bbb;
+    --off-white: #e8e8e8;
+    --white: #f5f5f5;
+    --accent: #c8b89a;
+    --font-display: 'League Spartan', sans-serif;
+    --font-body: 'League Spartan', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--off-white);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.7;
+    cursor: none;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--accent); color: var(--black); }
+
+  /* CURSOR */
+  .cursor {
+    width: 8px; height: 8px;
+    background: var(--white);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease, opacity 0.2s ease;
+  }
+  .cursor-ring {
+    width: 32px; height: 32px;
+    border: 0.5px solid rgba(255,255,255,0.4);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.35s ease, width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+  }
+  body.cursor-hover .cursor-ring {
+    width: 56px; height: 56px;
+    border-color: var(--accent);
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 48px;
+    mix-blend-mode: difference;
+  }
+  .logo {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+  .nav-links a:hover { opacity: 1; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+    padding: 0 48px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: var(--black);
+    z-index: 0;
+  }
+  .hero-bg-strip {
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 42%;
+    background: var(--off-black);
+    z-index: 0;
+  }
+  .hero-left {
+    position: relative;
+    z-index: 1;
+    padding-top: 140px;
+  }
+  .hero-eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 0.5px;
+    background: var(--muted);
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(52px, 7vw, 88px);
+    font-weight: 200;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 40px;
+  }
+  .hero-title .accent-line {
+    display: block;
+    color: var(--accent);
+    font-weight: 300;
+    font-style: italic;
+  }
+  .hero-desc {
+    font-size: 13px;
+    color: var(--subtle);
+    letter-spacing: 0.04em;
+    line-height: 1.9;
+    max-width: 320px;
+    margin-bottom: 48px;
+  }
+  .hero-actions { display: flex; gap: 12px; align-items: center; }
+  .btn {
+    font-family: var(--font-display);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 14px 32px;
+    border: none;
+    cursor: none;
+    transition: background 0.2s, color 0.2s;
+    display: inline-block;
+  }
+  .btn-primary { background: var(--white); color: var(--black); }
+  .btn-primary:hover { background: var(--accent); }
+  .btn-outline { background: transparent; color: var(--white); border: 0.5px solid var(--mid); }
+  .btn-outline:hover { border-color: var(--subtle); }
+
+  .hero-right {
+    position: relative;
+    z-index: 1;
+    padding-top: 120px;
+    padding-left: 40px;
+    padding-bottom: 0;
+  }
+  .hero-img-frame {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: var(--dark);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-img-frame img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+  }
+  .hero-img-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    color: var(--mid);
+  }
+  .hero-img-placeholder svg { width: 48px; height: 48px; stroke: var(--mid); fill: none; }
+  .hero-img-placeholder span { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; }
+  .hero-counter {
+    position: absolute;
+    bottom: -1px;
+    left: -1px;
+    background: var(--accent);
+    color: var(--black);
+    padding: 8px 16px;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .hero-scroll {
+    position: absolute;
+    bottom: 48px;
+    left: 48px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .scroll-line {
+    width: 48px;
+    height: 0.5px;
+    background: var(--muted);
+    position: relative;
+    overflow: hidden;
+  }
+  .scroll-line::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: var(--subtle);
+    animation: scrollline 2s ease-in-out infinite;
+  }
+  @keyframes scrollline { to { left: 100%; } }
+
+  /* TICKER */
+  .ticker {
+    border-top: 0.5px solid var(--mid);
+    border-bottom: 0.5px solid var(--mid);
+    overflow: hidden;
+    padding: 12px 0;
+    background: var(--off-black);
+  }
+  .ticker-track {
+    display: flex;
+    gap: 0;
+    animation: ticker 20s linear infinite;
+    white-space: nowrap;
+  }
+  .ticker-item {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0 32px;
+  }
+  .ticker-item span { color: var(--accent); margin-right: 8px; }
+  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* SECTION BASE */
+  section { padding: 96px 48px; }
+  .section-label {
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+  .section-label::after {
+    content: '';
+    display: block;
+    flex: 1;
+    height: 0.5px;
+    background: var(--mid);
+  }
+
+  /* CATEGORIAS */
+  .categories { background: var(--off-black); padding: 96px 48px; }
+  .cat-intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 56px;
+  }
+  .cat-title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 200;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    max-width: 400px;
+  }
+  .cat-title em { font-style: italic; color: var(--accent); }
+  .cat-subtitle {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    max-width: 200px;
+    text-align: right;
+    line-height: 1.8;
+  }
+  .cat-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 2px;
+    height: 520px;
+  }
+  .cat-card {
+    background: var(--dark);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    cursor: none;
+  }
+  .cat-card-bg {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.6s ease;
+  }
+  .cat-card:hover .cat-card-bg { transform: scale(1.04); }
+  .cat-card-bg img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; }
+  .cat-card-bg-placeholder {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .cat-card-bg-placeholder svg { width: 40px; height: 40px; stroke: var(--mid); fill: none; opacity: 0.5; }
+  .cat-info {
+    position: relative;
+    z-index: 1;
+    padding: 24px;
+    width: 100%;
+    background: linear-gradient(transparent, rgba(0,0,0,0.88));
+  }
+  .cat-num {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .cat-name {
+    font-size: 15px;
+    font-weight: 300;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    line-height: 1.3;
+  }
+  .cat-arrow {
+    position: absolute;
+    top: 20px; right: 20px;
+    z-index: 1;
+    width: 32px; height: 32px;
+    border: 0.5px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .cat-arrow svg { width: 14px; height: 14px; stroke: var(--white); fill: none; }
+  .cat-card:hover .cat-arrow { opacity: 1; }
+
+  /* WORKS */
+  .works-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .work-item {
+    position: relative;
+    overflow: hidden;
+    cursor: none;
+    background: var(--dark);
+  }
+  .work-item:nth-child(1) { grid-column: span 2; aspect-ratio: 16/9; }
+  .work-item:nth-child(n+2) { aspect-ratio: 1; }
+  .work-item:nth-child(4) { grid-column: span 2; aspect-ratio: 16/9; }
+  .work-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.75;
+    transition: opacity 0.4s ease, transform 0.6s ease;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .work-placeholder {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .work-placeholder svg { width: 36px; height: 36px; stroke: var(--mid); fill: none; opacity: 0.4; }
+  .work-item:hover .work-img { opacity: 1; transform: scale(1.03); }
+  .work-overlay {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 20px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    transform: translateY(8px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .work-item:hover .work-overlay { transform: translateY(0); opacity: 1; }
+  .work-name { font-size: 13px; font-weight: 300; letter-spacing: 0.04em; color: var(--white); }
+  .work-cat { font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
+
+  /* SERVICES */
+  .services { background: var(--off-black); }
+  .services-inner {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .services-left {}
+  .services-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 200;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+    margin-bottom: 24px;
+  }
+  .services-title em { font-style: italic; color: var(--accent); }
+  .services-note {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.03em;
+    line-height: 1.9;
+  }
+  .svc-list { display: flex; flex-direction: column; }
+  .svc-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 0;
+    border-top: 0.5px solid var(--mid);
+    gap: 24px;
+    transition: padding-left 0.3s ease;
+    cursor: none;
+  }
+  .svc-row:last-child { border-bottom: 0.5px solid var(--mid); }
+  .svc-row:hover { padding-left: 12px; }
+  .svc-left {}
+  .svc-name {
+    font-size: 15px;
+    font-weight: 300;
+    letter-spacing: 0.03em;
+    color: var(--off-white);
+    margin-bottom: 4px;
+  }
+  .svc-desc {
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+  .svc-right { text-align: right; flex-shrink: 0; }
+  .svc-price {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--white);
+  }
+  .svc-unit {
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* SOBRE */
+  .about { background: var(--black); }
+  .about-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 0;
+  }
+  .about-img-wrap {
+    position: relative;
+    aspect-ratio: 3/4;
+    background: var(--dark);
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .about-img-wrap img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
+  .about-img-placeholder { display: flex; flex-direction: column; align-items: center; gap: 10px; color: var(--mid); }
+  .about-img-placeholder svg { width: 48px; height: 48px; stroke: var(--mid); fill: none; }
+  .about-img-placeholder span { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; }
+  .about-img-tag {
+    position: absolute;
+    bottom: 0; right: 0;
+    background: var(--accent);
+    color: var(--black);
+    padding: 10px 20px;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .about-content {
+    padding: 64px 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--off-black);
+  }
+  .about-eyebrow {
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .about-name {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 200;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+  .about-role {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 32px;
+  }
+  .about-text {
+    font-size: 13px;
+    color: var(--subtle);
+    line-height: 1.9;
+    letter-spacing: 0.03em;
+    margin-bottom: 40px;
+  }
+  .about-stats {
+    display: flex;
+    gap: 32px;
+    padding: 28px 0;
+    border-top: 0.5px solid var(--mid);
+    border-bottom: 0.5px solid var(--mid);
+    margin-bottom: 40px;
+  }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 32px;
+    font-weight: 200;
+    color: var(--white);
+    line-height: 1;
+  }
+  .stat-lbl {
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+
+  /* CONTACT */
+  .contact { background: var(--off-black); }
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .contact-title {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 4vw, 56px);
+    font-weight: 200;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+  }
+  .contact-title em { font-style: italic; color: var(--accent); display: block; }
+  .contact-form { display: flex; flex-direction: column; gap: 2px; }
+  .form-field input,
+  .form-field textarea {
+    width: 100%;
+    background: var(--dark);
+    border: none;
+    border-bottom: 0.5px solid var(--mid);
+    padding: 16px 0;
+    font-family: var(--font-body);
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-field input::placeholder,
+  .form-field textarea::placeholder { color: var(--muted); }
+  .form-field input:focus,
+  .form-field textarea:focus { border-color: var(--accent); }
+  .form-field textarea { resize: none; height: 100px; }
+  .form-submit {
+    margin-top: 24px;
+    background: var(--accent);
+    color: var(--black);
+    border: none;
+    padding: 16px 40px;
+    font-family: var(--font-display);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    cursor: none;
+    align-self: flex-start;
+    transition: background 0.2s;
+  }
+  .form-submit:hover { background: var(--white); }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    border-top: 0.5px solid var(--mid);
+    padding: 28px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-copy {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+  .footer-social { display: flex; gap: 24px; }
+  .footer-social a {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-social a:hover { color: var(--accent); }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 0 24px 48px; }
+    .hero-right { display: none; }
+    .hero-left { padding-top: 120px; }
+    section { padding: 64px 24px; }
+    .categories { padding: 64px 24px; }
+    .cat-grid { grid-template-columns: 1fr; height: auto; }
+    .cat-card { aspect-ratio: 16/9; }
+    .cat-intro { flex-direction: column; gap: 16px; }
+    .cat-subtitle { text-align: left; }
+    .works-grid { grid-template-columns: 1fr; }
+    .work-item:nth-child(1), .work-item:nth-child(4) { grid-column: span 1; aspect-ratio: 16/9; }
+    .work-item:nth-child(n+2) { aspect-ratio: 16/9; }
+    .services-inner { grid-template-columns: 1fr; gap: 40px; }
+    .about-inner { grid-template-columns: 1fr; }
+    .about-content { padding: 40px 24px; }
+    .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+    footer { flex-direction: column; gap: 16px; text-align: center; padding: 24px; }
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
+
+<nav>
+  <a href="#" class="logo">Henry Sanchez</a>
+  <ul class="nav-links">
+    <li><a href="#trabalhos">Trabalhos</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-bg-strip"></div>
+  <div class="hero-left">
+    <p class="hero-eyebrow">Fotógrafo & Filmmaker — Manaus, Amazônia</p>
+    <h1 class="hero-title">
+      Visual que<br>
+      <em class="accent-line">converte</em>
+      marcas.
+    </h1>
+    <p class="hero-desc">Fotografia e vídeo cinematográfico para hospedagens, restaurantes, turismo e retratos na região amazônica.</p>
+    <div class="hero-actions">
+      <a href="#trabalhos" class="btn btn-primary">Ver portfólio</a>
+      <a href="#contato" class="btn btn-outline">Solicitar orçamento</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-frame">
+      <!-- Substitua pelo caminho da sua foto: <img src="sua-foto.jpg" alt="Henry Sanchez"> -->
+      <div class="hero-img-placeholder">
+        <svg viewBox="0 0 24 24" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <span>Sua foto aqui</span>
+      </div>
+      <div class="hero-counter">Manaus — AM</div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="ticker-item"><span>—</span> Hospedagens</span>
+    <span class="ticker-item"><span>—</span> Restaurantes</span>
+    <span class="ticker-item"><span>—</span> Turismo</span>
+    <span class="ticker-item"><span>—</span> Retratos</span>
+    <span class="ticker-item"><span>—</span> Drone</span>
+    <span class="ticker-item"><span>—</span> Vídeo</span>
+    <span class="ticker-item"><span>—</span> Amazônia</span>
+    <span class="ticker-item"><span>—</span> Hospedagens</span>
+    <span class="ticker-item"><span>—</span> Restaurantes</span>
+    <span class="ticker-item"><span>—</span> Turismo</span>
+    <span class="ticker-item"><span>—</span> Retratos</span>
+    <span class="ticker-item"><span>—</span> Drone</span>
+    <span class="ticker-item"><span>—</span> Vídeo</span>
+    <span class="ticker-item"><span>—</span> Amazônia</span>
+  </div>
+</div>
+
+<section class="categories" id="trabalhos">
+  <div class="section-label">Especialidades</div>
+  <div class="cat-intro">
+    <h2 class="cat-title">Imagens que<br><em>vendem experiências</em></h2>
+    <p class="cat-subtitle">Três categorias, uma linguagem visual consistente.</p>
+  </div>
+  <div class="cat-grid">
+    <div class="cat-card fade-up">
+      <div class="cat-card-bg">
+        <!-- <img src="hospedagem.jpg" alt="Hospedagens e Restaurantes"> -->
+        <div class="cat-card-bg-placeholder">
+          <svg viewBox="0 0 24 24" stroke-width="0.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+      </div>
+      <div class="cat-arrow">
+        <svg viewBox="0 0 24 24" stroke-width="1.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </div>
+      <div class="cat-info">
+        <p class="cat-num">01</p>
+        <p class="cat-name">Hospedagens &<br>restaurantes</p>
+      </div>
+    </div>
+    <div class="cat-card fade-up">
+      <div class="cat-card-bg">
+        <!-- <img src="turismo.jpg" alt="Turismo"> -->
+        <div class="cat-card-bg-placeholder">
+          <svg viewBox="0 0 24 24" stroke-width="0.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        </div>
+      </div>
+      <div class="cat-arrow">
+        <svg viewBox="0 0 24 24" stroke-width="1.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </div>
+      <div class="cat-info">
+        <p class="cat-num">02</p>
+        <p class="cat-name">Turismo &<br>natureza</p>
+      </div>
+    </div>
+    <div class="cat-card fade-up">
+      <div class="cat-card-bg">
+        <!-- <img src="retrato.jpg" alt="Retratos"> -->
+        <div class="cat-card-bg-placeholder">
+          <svg viewBox="0 0 24 24" stroke-width="0.8"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+      </div>
+      <div class="cat-arrow">
+        <svg viewBox="0 0 24 24" stroke-width="1.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
+      </div>
+      <div class="cat-info">
+        <p class="cat-num">03</p>
+        <p class="cat-name">Retratos</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding: 96px 48px; background: var(--black);">
+  <div class="section-label">Trabalhos recentes</div>
+  <div class="works-grid">
+    <div class="work-item fade-up">
+      <div class="work-placeholder"><svg viewBox="0 0 24 24" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+      <!-- <img class="work-img" src="trabalho1.jpg" alt="Iguana Tour"> -->
+      <div class="work-overlay">
+        <div><p class="work-name">Iguana Tour</p><p class="work-cat">Turismo</p></div>
+      </div>
+    </div>
+    <div class="work-item fade-up">
+      <div class="work-placeholder"><svg viewBox="0 0 24 24" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+      <div class="work-overlay">
+        <div><p class="work-name">Pousada Amazônia</p><p class="work-cat">Hospedagem</p></div>
+      </div>
+    </div>
+    <div class="work-item fade-up">
+      <div class="work-placeholder"><svg viewBox="0 0 24 24" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+      <div class="work-overlay">
+        <div><p class="work-name">Retrato editorial</p><p class="work-cat">Retrato</p></div>
+      </div>
+    </div>
+    <div class="work-item fade-up">
+      <div class="work-placeholder"><svg viewBox="0 0 24 24" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+      <div class="work-overlay">
+        <div><p class="work-name">Restaurante Tucunaré</p><p class="work-cat">Gastronomia</p></div>
+      </div>
+    </div>
+    <div class="work-item fade-up">
+      <div class="work-placeholder"><svg viewBox="0 0 24 24" stroke-width="0.8"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+      <div class="work-overlay">
+        <div><p class="work-name">Voo sobre o Rio Negro</p><p class="work-cat">Drone</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="servicos">
+  <div class="section-label">Serviços & preços</div>
+  <div class="services-inner">
+    <div class="services-left fade-up">
+      <h2 class="services-title">Invista em<br><em>imagens que<br>trabalham</em><br>por você.</h2>
+      <p class="services-note" style="margin-top: 28px;">Todos os projetos incluem entrega em alta resolução, direitos de uso comercial e revisões incluídas.</p>
+    </div>
+    <div class="svc-list">
+      <div class="svc-row fade-up">
+        <div class="svc-left">
+          <p class="svc-name">Fotografia de hospedagem & restaurante</p>
+          <p class="svc-desc">Ambientes, detalhes, gastronomia</p>
+        </div>
+        <div class="svc-right">
+          <p class="svc-price">R$ 800</p>
+          <p class="svc-unit">por sessão</p>
+        </div>
+      </div>
+      <div class="svc-row fade-up">
+        <div class="svc-left">
+          <p class="svc-name">Fotografia de turismo & natureza</p>
+          <p class="svc-desc">Paisagens, experiências, aventura</p>
+        </div>
+        <div class="svc-right">
+          <p class="svc-price">R$ 1.200</p>
+          <p class="svc-unit">por dia</p>
+        </div>
+      </div>
+      <div class="svc-row fade-up">
+        <div class="svc-left">
+          <p class="svc-name">Retrato</p>
+          <p class="svc-desc">Pessoal, profissional, editorial</p>
+        </div>
+        <div class="svc-right">
+          <p class="svc-price">R$ 600</p>
+          <p class="svc-unit">por sessão</p>
+        </div>
+      </div>
+      <div class="svc-row fade-up">
+        <div class="svc-left">
+          <p class="svc-name">Vídeo & drone</p>
+          <p class="svc-desc">Filmagem cinematográfica e aérea</p>
+        </div>
+        <div class="svc-right">
+          <p class="svc-price">R$ 1.500</p>
+          <p class="svc-unit">por projeto</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="sobre">
+  <div class="section-label">Sobre</div>
+  <div class="about-inner">
+    <div class="about-img-wrap fade-up">
+      <!-- <img src="henry.jpg" alt="Henry Sanchez"> -->
+      <div class="about-img-placeholder">
+        <svg viewBox="0 0 24 24" stroke-width="0.8"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span>Sua foto aqui</span>
+      </div>
+      <div class="about-img-tag">Manaus — AM</div>
+    </div>
+    <div class="about-content fade-up">
+      <p class="about-eyebrow">Henry Sanchez</p>
+      <h2 class="about-name">Criando imagens<br>que ficam.</h2>
+      <p class="about-role">Fotógrafo & Filmmaker — Amazônia</p>
+      <p class="about-text">Baseado em Manaus, especializado em traduzir experiências em imagens que comunicam. Trabalho com marcas pequenas e médias que querem se destacar — de pousadas e restaurantes a experiências de turismo únicas na Amazônia.</p>
+      <div class="about-stats">
+        <div><p class="stat-num">50+</p><p class="stat-lbl">Projetos</p></div>
+        <div><p class="stat-num">30+</p><p class="stat-lbl">Clientes</p></div>
+        <div><p class="stat-num">5</p><p class="stat-lbl">Anos</p></div>
+      </div>
+      <a href="#contato" class="btn btn-outline">Vamos conversar</a>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contato">
+  <div class="section-label">Contato</div>
+  <div class="contact-inner">
+    <div class="fade-up">
+      <h2 class="contact-title">Vamos criar<br><em>algo juntos.</em></h2>
+      <p style="font-size: 12px; color: var(--muted); margin-top: 24px; letter-spacing: 0.04em; line-height: 1.9;">Respondo em até 24 horas. Para projetos urgentes, prefira o WhatsApp.</p>
+    </div>
+    <form class="contact-form fade-up" onsubmit="return false;">
+      <div class="form-field">
+        <input type="text" placeholder="Seu nome" required>
+      </div>
+      <div class="form-field">
+        <input type="email" placeholder="Seu e-mail" required>
+      </div>
+      <div class="form-field">
+        <input type="text" placeholder="Tipo de projeto">
+      </div>
+      <div class="form-field">
+        <textarea placeholder="Conte sobre seu projeto..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Enviar mensagem</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <p class="footer-copy">© 2026 Henry Sanchez — Todos os direitos reservados</p>
+  <div class="footer-social">
+    <a href="https://instagram.com/seuuser" target="_blank">Instagram</a>
+    <a href="https://youtube.com/seucanal" target="_blank">YouTube</a>
+    <a href="https://wa.me/5592999999999" target="_blank">WhatsApp</a>
+  </div>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.transform = `translate(${mx - 4}px, ${my - 4}px)`;
+  });
+
+  function animateRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.transform = `translate(${rx - 16}px, ${ry - 16}px)`;
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button, .cat-card, .work-item, .svc-row').forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
