@@ -788,9 +788,7 @@
     <div class="cat-card fade-up">
       <div class="cat-card-bg">
         <!-- <img src="turismo.jpg" alt="Turismo"> -->
-        <div class="cat-card-bg-placeholder">
-          <svg viewBox="0 0 24 24" stroke-width="0.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-        </div>
+        <img src="DJI_20251125094311_0014_D.jpg" alt="Turismo Amazônia" style="width:100%;height:100%;object-fit:cover;opacity:0.7;">
       </div>
       <div class="cat-arrow">
         <svg viewBox="0 0 24 24" stroke-width="1.5"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
@@ -924,9 +922,9 @@
       <p class="about-role">Fotógrafo & Filmmaker — Amazônia</p>
       <p class="about-text">Baseado em Manaus, especializado em traduzir experiências em imagens que comunicam. Trabalho com marcas pequenas e médias que querem se destacar — de pousadas e restaurantes a experiências de turismo únicas na Amazônia.</p>
       <div class="about-stats">
-        <div><p class="stat-num">50+</p><p class="stat-lbl">Projetos</p></div>
-        <div><p class="stat-num">30+</p><p class="stat-lbl">Clientes</p></div>
-        <div><p class="stat-num">5</p><p class="stat-lbl">Anos</p></div>
+        <div><p class="stat-num"><span class="counter" data-target="50" data-suffix="+">0</span></p><p class="stat-lbl">Projetos</p></div>
+        <div><p class="stat-num"><span class="counter" data-target="30" data-suffix="+">0</span></p><p class="stat-lbl">Clientes</p></div>
+        <div><p class="stat-num"><span class="counter" data-target="5" data-suffix="">0</span></p><p class="stat-lbl">Anos</p></div>
       </div>
       <a href="https://wa.me/5592984590048?text=Olá%20Henry!%20Gostaria%20de%20solicitar%20um%20orçamento." target="_blank" class="btn btn-outline">Vamos conversar</a>
     </div>
@@ -994,6 +992,30 @@
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  const counterObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseInt(el.dataset.target);
+        const suffix = el.dataset.suffix || '';
+        const duration = 1800;
+        const step = 16;
+        const increment = target / (duration / step);
+        let current = 0;
+        const timer = setInterval(() => {
+          current += increment;
+          if (current >= target) {
+            current = target;
+            clearInterval(timer);
+          }
+          el.textContent = Math.floor(current) + suffix;
+        }, step);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
 </script>
 </body>
 </html>
